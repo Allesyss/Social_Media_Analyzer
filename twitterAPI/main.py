@@ -24,7 +24,9 @@ def get_all_tweets(screen_name):
     api = tweepy.API(auth)
     
     #initialize a list to hold all the tweepy Tweets
-    alltweets = []    
+    alltweets = []
+
+    print('Authorization successful')
     
     #make initial request for most recent tweets (200 is the maximum allowed count)
     new_tweets = api.user_timeline(screen_name = screen_name,count=10)
@@ -46,13 +48,12 @@ def get_all_tweets(screen_name):
         
         #update the id of the oldest tweet less one
         oldest = alltweets[-1].id - 1
-        if(len(alltweets) > 15):
-            break
+
         print "...%s tweets downloaded so far" % (len(alltweets))
        
     #write tweet objects to JSON
-    file = open('tweet.json', 'w') 
-    print "Writing tweet objects to JSON please wait..."
+    file = open('tweet_outcome.json', 'w')
+    print "Writing tweet objects to JSON"
     for status in alltweets:
         json.dump(status._json,file,sort_keys = True,indent = 4)
     
@@ -69,6 +70,8 @@ def Get_Identity():
 
 
 if __name__ == '__main__':
+
+    #creates an interface for the user to input the keys
     root = tkinter.Tk()
     label_consumer_key = tkinter.Label(root, text="consumer key:")
     label_consumer_key.place(relx=0.05, rely=0.2)
@@ -89,8 +92,8 @@ if __name__ == '__main__':
     button1 = tkinter.Button(root, text="confirm", command=Get_Identity)
     button1.place(relx=0.5, rely=0.95)
     root.mainloop()
-    
+
     Get_Identity()
-    
+
     #pass in the username of the account you want to download
-    get_all_tweets("@Ibra_official")
+    get_all_tweets("@ ... ")
