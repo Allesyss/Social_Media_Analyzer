@@ -84,3 +84,17 @@ Line5: Scores -0.6. A script from The Lord of the Rings. It contains negative in
 ## Summary
 Generally speaking, the NLP did well, despite very few failures. Not to mention obvious negative sentiment, it can detect hidden
  and vague negative sentiment with good accuracy.
+ 
+## pytest
+
+Pytest is used to test the GoogleNLP programs.
+
+There are two test files: test_tut and test_NLP. The former one is a fully functional pytest file used as a test example. The latter is the test file for GoogleNLP, but because the GoogleNLP program cannot be run without error because of lacking certain types in the library provided by Google(Using the code provided by the GoogleNLP official does not work, because it indicates I am lacking a type in a function. I have not fixed this problem, even if I consulted on the Internet for help. This may have something to do with my IDE or my environment), this test file will not function as it is expected to.
+
+If the GoogleNLP functions can function properly, the tests for this part will be:
+
+1, to test if the function is started and activated properly.  
+2, to test if the function outputs the score of the text.  
+3, to test if the function outputs the sentiment of the text.
+
+The test is carried out by: redirecting the print destination (of the outcome of analyzing the text) to a txt file, and searching for certain key words within the analysis outcome. In the function analyze_sentiment of GoogleNLP, outcome is printed out by using the *print* function. This cannot be read directly. To read this part of the content, I redirected the print destination from the stdout to a text file within the same directory. The outcome is stored in a class. Test functions read the class instead of the .txt file(which is for the user to see)
